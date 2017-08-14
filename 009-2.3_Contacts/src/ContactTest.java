@@ -2,37 +2,42 @@
  * Practice 009-2.3_Contact 
  * Date 20170814
  */
+import java.util.Scanner;
 
 public class ContactTest {
+	
+	public static Contacts accountBook = new Contacts();
 
 	public static void main(String[] args) {
-		CDate d1 = new CDate(2011, 2, 29);
-		CDate d2 = new CDate(-5, 1 ,3);
-		CDate d3 = new CDate(2011, 13, 1);
+		Scanner scanner = new Scanner(System.in);
 		
-		d1.print();
-		System.out.println();
-		d2.print();
-		System.out.println();
-		d3.print();
-		System.out.println();
-		
-		int result1 = CDate.compare(d1, d2);
-		int result2 = CDate.compare(d2, d3);
-		System.out.println(result1);
-		System.out.println(result2);
-		
-		CDate b1 = new CDate(1977, 6, 27);
-		Account u1 = new Account("Joe", 40, b1);
-		CDate b2 = new CDate(1987, 4, 30);
-		Account u2 = new Account("Mary", 30, b2);
-		System.out.print(u1.getName()+" "+u1.getAge()+" ");
-		u1.getBirthday().print();
-		System.out.println("");
-				
-		System.out.print(u2.getName()+" "+u2.getAge()+" ");
-		u2.getBirthday().print();
-		System.out.println("");
+		int option = -1;
+		do {
+			System.out.print("選項：1)新增, 2)印出全部, -1)結束：");
+			option = scanner.nextInt();
+			if (option != -1 && option != 1 && option != 2)
+				System.out.print("Input error!");
+			else if (option == -1) {
+				System.out.println("感謝您的使用!");
+				break;
+			}
+			else if (option == 2) {
+				accountBook.print();
+			}
+			else if (option == 1){
+				System.out.print("姓名：");
+				String name = scanner.next();
+				System.out.print("年齡：");
+				int age = scanner.nextInt();
+				System.out.print("生日(年/月/日)：");
+				int year = scanner.nextInt();
+				int month = scanner.nextInt();
+				int day = scanner.nextInt();
+				CDate b1 = new CDate(year, month, day);
+				accountBook.add(name, age, b1);
+				System.out.println("輸入成功！");
+			}
+		} while (true);
 
 	}
 
